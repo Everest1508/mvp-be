@@ -33,6 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     college = models.CharField(max_length=255,null=True,blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_trusty = models.BooleanField(default=False)
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
     otp = models.IntegerField(null=True)

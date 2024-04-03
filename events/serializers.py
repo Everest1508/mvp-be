@@ -1,21 +1,19 @@
-class TeacherRegisterAPIView(generics.CreateAPIView):
-    serializer_class = UserSerializer
+from rest_framework import serializers
+from .models import SubEvent,MainEvent
+from participants.models import EventParticipant
+from participants.serializers import EventParticipantSerializer
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save(is_teacher=True)
-            Teacher.objects.create(user=user)
-            return Response({'message': 'Teacher registered successfully'}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class SubEventSerializer(serializers.ModelSerializer):
+    participants = serializers.SerializerMethodField()
+    class Meta:
+        model = SubEvent
+        fields = ['title', 'game', 'description', 'rules','main_event','participants']
+        
+    def get_participants(self,obj):
+        participants = EventParticipant.objects.filter(event=obj)
+        return EventParticipantSerializer(participants,many=True).data
 
-class StudentRegisterAPIView(generics.CreateAPIView):
-    serializer_class = UserSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save(is_student=True)
-            Student.objects.create(user=user)
-            return Response({'message': 'Student registered successfully'}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class MainEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MainEvent
+        fields = "__all__"

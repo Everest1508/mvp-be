@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'events',
     'rest_framework_simplejwt',
+    'participants',
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "itsriteshmahale2002@gmail.com" 
 EMAIL_HOST_PASSWORD = "jduq xhqz tizb xviq"
+
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"

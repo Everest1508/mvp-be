@@ -1,0 +1,361 @@
+{
+	"info": {
+		"_postman_id": "d3b75ae4-a217-4bdf-bc71-33e3749c8438",
+		"name": "MVP BE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19936383",
+		"_collection_link": "https://red-moon-763858.postman.co/workspace/New-Team-Workspace~de8068dc-8d51-40ff-b078-e199dd26b15e/collection/19936383-d3b75ae4-a217-4bdf-bc71-33e3749c8438?action=share&source=collection_link&creator=19936383"
+	},
+	"item": [
+		{
+			"name": "teacher-register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"p@example.com\",\r\n    \"password\": \"password123\",\r\n    \"name\": \"Tejas Tejas\",\r\n    \"phone\": \"1304567890\",\r\n    \"age\": 31,\r\n    \"college\": \"Example University\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/teacher-register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"teacher-register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "student-register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"student@example.com\",\r\n    \"password\": \"password123\",\r\n    \"name\": \"Tejas Tejas\",\r\n    \"phone\": \"1234597890\",\r\n    \"age\": 31,\r\n    \"college\": \"Example University\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/student-register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"student-register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"student@example.com\",\r\n    \"password\": \"password123\"\r\n}\r\n\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"student@example.com\",\r\n    \"otp\": 9288\r\n}\r\n\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/verify/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"verify",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create sub event",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Subevent Title\",\r\n    \"game\": \"Subevent Game\",\r\n    \"description\": \"Subevent Description\",\r\n    \"rules\": \"Subevent Rules\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/event/main-event/1/create-subevent/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"event",
+						"main-event",
+						"1",
+						"create-subevent",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "participate in event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE0NzY4OTA5LCJpYXQiOjE3MTIxNzY5MDksImp0aSI6ImY0Y2JjMTRjOWEzZjQ2MmZiZTFlMjNmZjBiZjZkYzU1IiwidXNlcl9pZCI6MTJ9.T1bmgmV1V1FI6rrwMLYUk6S_sPyRzhnPUS69duQHdq0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"event_id\":1\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/participants/participate/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"participants",
+						"participate",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sub-events-list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE0NzY4OTA5LCJpYXQiOjE3MTIxNzY5MDksImp0aSI6ImY0Y2JjMTRjOWEzZjQ2MmZiZTFlMjNmZjBiZjZkYzU1IiwidXNlcl9pZCI6MTJ9.T1bmgmV1V1FI6rrwMLYUk6S_sPyRzhnPUS69duQHdq0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"event_id\":1\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/event/main-event/1/sub-events/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"event",
+						"main-event",
+						"1",
+						"sub-events",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "my-events",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE0NzY4OTA5LCJpYXQiOjE3MTIxNzY5MDksImp0aSI6ImY0Y2JjMTRjOWEzZjQ2MmZiZTFlMjNmZjBiZjZkYzU1IiwidXNlcl9pZCI6MTJ9.T1bmgmV1V1FI6rrwMLYUk6S_sPyRzhnPUS69duQHdq0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/participants/my-events/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"participants",
+						"my-events",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "main-event-list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE0NzY4OTA5LCJpYXQiOjE3MTIxNzY5MDksImp0aSI6ImY0Y2JjMTRjOWEzZjQ2MmZiZTFlMjNmZjBiZjZkYzU1IiwidXNlcl9pZCI6MTJ9.T1bmgmV1V1FI6rrwMLYUk6S_sPyRzhnPUS69duQHdq0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/event/main-events/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"event",
+						"main-events",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

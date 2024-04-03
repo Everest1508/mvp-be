@@ -24,7 +24,7 @@ class TeacherRegisterAPIView(generics.CreateAPIView):
         if serializer.is_valid():
             user = serializer.save(is_teacher=True)
             Teacher.objects.create(user=user)
-            return Response({'message': 'Teacher registered successfully'}, status=status.HTTP_201_CREATED)
+            return Response({'msg': 'Teacher registered successfully'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class StudentRegisterAPIView(generics.CreateAPIView):
@@ -37,7 +37,7 @@ class StudentRegisterAPIView(generics.CreateAPIView):
         if serializer.is_valid():
             user = serializer.save(is_student=True)
             Student.objects.create(user=user)
-            return Response({'message': 'Student registered successfully'}, status=status.HTTP_201_CREATED)
+            return Response({'msg': 'Student registered successfully'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class VerifyUserAPIView(APIView):
@@ -45,14 +45,17 @@ class VerifyUserAPIView(APIView):
         try:
             email = request.data['email']
             otp = request.data['otp']
-            user = User.objects.get(email=email,otp=otp)
+            user = User.objects.get(email=email, otp=otp)
             if user:
                 user.is_trusty = True
-                return Response()
+                user.save()
+                return Response({'msg': 'User verified successfully'}, status=status.HTTP_200_OK)
             else:
-                return Response()
-        except:
-            return Response()
+                return Response({'msg': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        except User.DoesNotExist:
+            return Response({'msg': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'msg': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class UserLoginAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
@@ -63,6 +66,8 @@ class UserLoginAPIView(generics.CreateAPIView):
 
         user = User.objects.filter(email=email).first()
         if user and user.check_password(password):
+            if not user.is_trusty:
+                return Response({'msg': 'Profile is not verified'}, status=status.HTTP_401_UNAUTHORIZED)
             token = get_tokens_for_user(user=user)
             data = {
                 'token': token,
@@ -71,4 +76,4 @@ class UserLoginAPIView(generics.CreateAPIView):
                 'is_student': user.is_student
             }
             return Response(data, status=status.HTTP_200_OK)
-        return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'msg': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)

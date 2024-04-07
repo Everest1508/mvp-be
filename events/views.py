@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.response import Response
-from .models import MainEvent, SubEvent
-from .serializers import SubEventSerializer,MainEventSerializer
+from .models import MainEvent, SubEvent,College
+from .serializers import SubEventSerializer,MainEventSerializer,CollegeSerializer
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -49,3 +49,7 @@ class MainEventListAPIView(APIView):
             return Response(serializer.data)
         except:
             return Response({'msg':'No Events Found'})
+        
+class CollegeAPIView(generics.ListCreateAPIView):
+    queryset = College.objects.all()
+    serializer_class = CollegeSerializer

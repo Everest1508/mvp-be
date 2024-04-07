@@ -47,7 +47,10 @@ class WithdrawAPIView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     def post(self,request,pk):
-        evnt_part = EventParticipant.objects.get(user=request.user,id=pk)
+        try:
+            evnt_part = EventParticipant.objects.get(user=request.user,id=pk)
+        except:
+            return Response({'msg':'No Event Exists'})
         evnt_part.delete()
         return Response({'msg':'Withdraw successfull'})
     

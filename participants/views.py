@@ -42,3 +42,12 @@ class MyParticipationsAPIView(APIView):
         participations = EventParticipant.objects.filter(user=user)
         serializer = EventParticipantSerializer(participations, many=True)
         return Response(serializer.data)
+
+class WithdrawAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self,request,pk):
+        evnt_part = EventParticipant.objects.get(user=request.user,id=pk)
+        evnt_part.delete()
+        return Response({'msg':'Withdraw successfull'})
+    

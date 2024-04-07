@@ -7,7 +7,7 @@ class SubEventSerializer(serializers.ModelSerializer):
     participants = serializers.SerializerMethodField()
     class Meta:
         model = SubEvent
-        fields = ['id','title', 'game', 'description', 'rules','main_event','participants']
+        fields = ['id','title', 'game', 'description','image','college' ,'rules','main_event','participants','created_by']
         
     def get_participants(self,obj):
         participants = EventParticipant.objects.filter(event=obj)

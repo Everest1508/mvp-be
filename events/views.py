@@ -10,7 +10,8 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 class SubEventCreateAPIView(generics.CreateAPIView):
     queryset = MainEvent.objects.all()
     serializer_class = SubEventSerializer
-
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         main_event_id = kwargs.get('main_event_id')
         try:
@@ -19,6 +20,9 @@ class SubEventCreateAPIView(generics.CreateAPIView):
             return Response({'msg': 'Main event does not exist'}, status=status.HTTP_404_NOT_FOUND)
         data = request.data
         data['main_event']=main_event.pk
+        data['created_by']=request.user.pk
+        data['college']=request.user.college
+        print(request.user)
         serializer = self.get_serializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -53,3 +57,10 @@ class MainEventListAPIView(APIView):
 class CollegeAPIView(generics.ListCreateAPIView):
     queryset = College.objects.all()
     serializer_class = CollegeSerializer
+    
+class CreatedEventAPIView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self,request):
+        events = SubEvent.objects.filter(created_by=request.user)
+        return Response(SubEventSerializer(events,many=True).data)

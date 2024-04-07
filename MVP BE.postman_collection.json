@@ -392,6 +392,73 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "created events",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE1MDY1NjMwLCJpYXQiOjE3MTI0NzM2MzAsImp0aSI6Ijg5ZWE4MTYyZWQzMzQ3NTFiODM1M2VkNjMyNTQ0MGY2IiwidXNlcl9pZCI6MTR9.PtHt3LodKNWA9Z8Y5dOtkRBu6Z8Jvze8TwZJbfD_mhA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "tile",
+							"type": "text"
+						},
+						{
+							"key": "game",
+							"value": "game",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "description",
+							"type": "text"
+						},
+						{
+							"key": "rules",
+							"value": "rule",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/dell/Downloads/Things-You-Should-Know-About-React-Hooks.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/event/created-events/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"event",
+						"created-events",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

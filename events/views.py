@@ -57,6 +57,12 @@ class MainEventListAPIView(APIView):
 class CollegeAPIView(generics.ListCreateAPIView):
     queryset = College.objects.all()
     serializer_class = CollegeSerializer
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        names = [item['name'] for item in serializer.data] 
+        # names.append("Other") 
+        return Response(names)
     
 class CreatedEventAPIView(APIView):
     authentication_classes = [JWTAuthentication]

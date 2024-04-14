@@ -70,3 +70,4 @@ class CreatedEventAPIView(APIView):
     def get(self,request):
         events = SubEvent.objects.filter(created_by=request.user)
         return Response(SubEventSerializer(events,many=True).data)
+    
